@@ -1,6 +1,8 @@
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Tracker.Application.Contracts.Tasks;
 using Tracker.Domain.Entities.DbModels;
+using Tracker.Domain.Entities.RequestModels.Projects;
 using Tracker.Domain.Entities.RequestModels.Tasks;
 using Tracker.Domain.Enums;
 using Tracker.Infrastructure.Persistance;
@@ -16,33 +18,22 @@ public class TaskRepository : IAboutTaskRepository, IChangeTaskRepository
         _db = db;
     }
 
-    public TaskDbModel GetFirstOrDefaultById(int id)
+    public TaskDbModel GetFirstOrDefaultById(FindTaskByIdRequestModel model)
     {
         var task = _db.Tasks
             .Include(t => t.Project)
-            .FirstOrDefault(t => t.Id == id);
+            .FirstOrDefault(t => t.Id == model.Id);
         
         if (task == null) throw new NullReferenceException("There is no such task");
         
         return task;
     }
-
-    public List<TaskDbModel> GetByName(string name)
+    
+    public List<TaskDbModel> GetAllByProjectId(FindAllByProjectIdRequestModel model)
     {
         var tasks = _db.Tasks
             .Include(t => t.Project)
-            .Where(t => t.Name.ToLower().Contains(name.ToLower())).ToList();
-        
-        if (tasks == null) throw new NullReferenceException("There is no such tasks");
-        
-        return tasks;
-    }
-
-    public List<TaskDbModel> GetAllByProjectId(int id)
-    {
-        var tasks = _db.Tasks
-            .Include(t => t.Project)
-            .Where(t => t.ProjectId == id).ToList();
+            .Where(t => t.ProjectId == model.Id).ToList();
         
         if (tasks == null) throw new NullReferenceException("There are no tasks in this project");
         
@@ -92,11 +83,11 @@ public class TaskRepository : IAboutTaskRepository, IChangeTaskRepository
         return task;
     }
 
-    public void DeleteTaskById(int id)
+    public void DeleteTaskById(DeleteProjectRequestModel model)
     {
         var task = _db.Tasks
             .Include(t => t.Project)
-            .FirstOrDefault(t => t.Id == id);
+            .FirstOrDefault(t => t.Id == model.Id);
         
         if (task == null) throw new NullReferenceException("There is no such task");
         

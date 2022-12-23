@@ -153,7 +153,10 @@ public class ProjectRepository : IAboutProjectRepository, IChangeProjectReposito
             .FirstOrDefault(p => p.Id == model.ProjectId);
         if (project == null) throw new NullReferenceException("There is no such project");
 
-        var task = _aboutTaskRepository.GetFirstOrDefaultById(model.TaskId);
+        var task = _db.Tasks
+            .Include(t => t.Project)
+            .FirstOrDefault(t => t.Id == model.TaskId);
+        
         if (task == null) throw new NullReferenceException("There is no such task");
 
         project.ProjectTasks.Remove(task);

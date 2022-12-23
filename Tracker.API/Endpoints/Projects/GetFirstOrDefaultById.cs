@@ -25,6 +25,6 @@ public class GetFirstOrDefaultById : EndpointBaseAsync
         CancellationToken cancellationToken = new CancellationToken())
     {
         var result = await _mediator.Send(request, cancellationToken);
-        return Ok(_mapper.Map<List<ProjectDbModel>>(result));
+        return Ok(_mapper.Map<ProjectDbModel>(result));
     }
 }
