@@ -7,7 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="12.0.0" />
+        <PackageReference Include="MediatR" Version="11.1.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.12">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Tracker.Application\Tracker.Application.csproj" />
+      <ProjectReference Include="..\Tracker.Infrastructure\Tracker.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
