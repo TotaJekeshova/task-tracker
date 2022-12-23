@@ -19,7 +19,7 @@ public class GetRangeByDatesCommandHandler : IRequestHandler<FilteredByDateReque
     public async Task<Result<List<ProjectDbModel>>> Handle(FilteredByDateRequestModel request, 
         CancellationToken cancellationToken)
     {
-        var result = _aboutProjectRepository.GetRangeByDates(request);
+        var result = _aboutProjectRepository.GetRangeByDates(request.StartDate, request.EndDate);
         return Result.Success(result);
     }
 }

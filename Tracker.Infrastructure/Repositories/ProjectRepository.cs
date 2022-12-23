@@ -23,44 +23,44 @@ public class ProjectRepository : IAboutProjectRepository, IChangeProjectReposito
         _aboutTaskRepository = aboutTaskRepository;
     }
 
-    public ProjectDbModel GetFirstOrDefaultById(FindProjectByIdRequestModel model)
+    public ProjectDbModel GetFirstOrDefaultById(int id)
     {
         var project = _db.Projects
             .Include(p => p.ProjectTasks)
-            .FirstOrDefault(p => p.Id == model.Id);
+            .FirstOrDefault(p => p.Id == id);
         if (project == null) throw new NullReferenceException("There is no such project");
         
         return project;
     }
     
-    public List<ProjectDbModel> GetFilteredByStartDate(FilteredByDateRequestModel model)
+    public List<ProjectDbModel> GetFilteredByStartDate(DateTime startDate)
     {
         var projects = _db.Projects
             .Include(p => p.ProjectTasks)
-            .Where(p => p.StartDate.Date == model.StartDate)
+            .Where(p => p.StartDate.Date == startDate)
             .OrderByDescending(p => p.Priority)
             .ToList();
 
         return projects;
     }
 
-    public List<ProjectDbModel> GetFilteredByEndDate(FilteredByDateRequestModel model)
+    public List<ProjectDbModel> GetFilteredByEndDate(DateTime endDate)
     {
         var projects = _db.Projects
             .Include(p => p.ProjectTasks)
-            .Where(p => p.CompletionDate.Date == model.EndDate)
+            .Where(p => p.CompletionDate.Date == endDate)
             .OrderByDescending(p => p.Priority)
             .ToList();
 
         return projects;
     }
 
-    public List<ProjectDbModel> GetRangeByDates(FilteredByDateRequestModel model)
+    public List<ProjectDbModel> GetRangeByDates(DateTime startDate, DateTime endDate)
     {
         var projects = _db.Projects
             .Include(p => p.ProjectTasks)
-            .Where(p => p.StartDate.Date >= model.StartDate
-                        && p.CompletionDate.Date <= model.EndDate)
+            .Where(p => p.StartDate.Date >= startDate
+                        && p.CompletionDate.Date <= endDate)
             .OrderByDescending(p => p.Priority)
             .ToList();
 
@@ -84,6 +84,8 @@ public class ProjectRepository : IAboutProjectRepository, IChangeProjectReposito
             Priority = model.Priority,
             ProjectTasks = new List<TaskDbModel>()
         };
+        Create(project);
+        SaveChanges();
         
         return project;
     }
@@ -132,11 +134,8 @@ public class ProjectRepository : IAboutProjectRepository, IChangeProjectReposito
                 Priority = model.TaskPriority,
                 ProjectId = project.Id
             };
-
-            var task = _changeTaskRepository.MapTaskToDefault(requestTask);
-            _changeTaskRepository.Create(task);
-            SaveChanges();
-
+            
+            _changeTaskRepository.MapTaskToDefault(requestTask);
             return project;
         }
         catch(Exception ex)

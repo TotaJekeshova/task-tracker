@@ -9,5 +9,5 @@ public interface IChangeTaskRepository : IBaseRepository<TaskDbModel>
 {
     TaskDbModel MapTaskToDefault (CreateTaskRequestModel model);
     TaskDbModel EditTask (EditTaskRequestModel model);
-    void DeleteTaskById(DeleteProjectRequestModel model);
+    void DeleteTaskById(DeleteTaskRequestModel model);
 }

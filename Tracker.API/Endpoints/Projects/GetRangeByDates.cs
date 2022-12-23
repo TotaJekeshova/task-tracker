@@ -21,7 +21,7 @@ public class GetRangeByDates : EndpointBaseAsync
     }
 
     [HttpGet("/Project/getRange")]
-    public override async Task<ActionResult<List<ProjectDbModel>>> HandleAsync(FilteredByDateRequestModel request,
+    public override async Task<ActionResult<List<ProjectDbModel>>> HandleAsync([FromQuery] FilteredByDateRequestModel request,
         CancellationToken cancellationToken = new CancellationToken())
     {
         var result = await _mediator.Send(request, cancellationToken);

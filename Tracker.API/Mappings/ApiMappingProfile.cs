@@ -14,13 +14,13 @@ public class ApiMappingProfile : Profile
         CreateMap<EditProjectRequestModel, ProjectDbModel>();
         CreateMap<AddTaskRequestModel, ProjectDbModel>();
         CreateMap<RemoveTaskRequestModel, ProjectDbModel>();
-        CreateMap<DeleteProjectRequestModel, ProjectDbModel>();
         CreateMap<FilteredByDateRequestModel, List<ProjectDbModel>>();
+        CreateMap<FilteredByStartDateRequestModel, List<ProjectDbModel>>();
+        CreateMap<FilteredByEndDateRequestModel, List<ProjectDbModel>>();
         CreateMap<FindProjectByIdRequestModel, ProjectDbModel>();
         
         CreateMap<CreateTaskRequestModel, TaskDbModel>();
         CreateMap<EditTaskRequestModel, TaskDbModel>();
-        CreateMap<DeleteTaskRequestModel, TaskDbModel>();
         CreateMap<FindTaskByIdRequestModel, TaskDbModel>();
         CreateMap<FindAllByProjectIdRequestModel,  List<TaskDbModel>>();
     }

@@ -1,11 +1,11 @@
 using Ardalis.Result;
 using MediatR;
 using Tracker.Application.Contracts.Tasks;
-using Tracker.Domain.Entities.RequestModels.Projects;
+using Tracker.Domain.Entities.RequestModels.Tasks;
 
 namespace Tracker.Application.Features.Tasks.Commands;
  
-public class DeleteTaskCommandHandler : IRequestHandler<DeleteProjectRequestModel, Result>
+public class DeleteTaskCommandHandler : IRequestHandler<DeleteTaskRequestModel, Result>
 {
     private readonly IChangeTaskRepository _changeTaskRepository;
 
@@ -14,7 +14,7 @@ public class DeleteTaskCommandHandler : IRequestHandler<DeleteProjectRequestMode
         _changeTaskRepository = changeTaskRepository;
     }
 
-    public async Task<Result> Handle(DeleteProjectRequestModel request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(DeleteTaskRequestModel request, CancellationToken cancellationToken)
     {
         _changeTaskRepository.DeleteTaskById(request);
         return Result.Success();

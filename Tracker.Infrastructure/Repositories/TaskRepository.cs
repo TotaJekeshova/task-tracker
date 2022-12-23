@@ -18,22 +18,22 @@ public class TaskRepository : IAboutTaskRepository, IChangeTaskRepository
         _db = db;
     }
 
-    public TaskDbModel GetFirstOrDefaultById(FindTaskByIdRequestModel model)
+    public TaskDbModel GetFirstOrDefaultById(int id)
     {
         var task = _db.Tasks
             .Include(t => t.Project)
-            .FirstOrDefault(t => t.Id == model.Id);
+            .FirstOrDefault(t => t.Id == id);
         
         if (task == null) throw new NullReferenceException("There is no such task");
         
         return task;
     }
     
-    public List<TaskDbModel> GetAllByProjectId(FindAllByProjectIdRequestModel model)
+    public List<TaskDbModel> GetAllByProjectId(int id)
     {
         var tasks = _db.Tasks
             .Include(t => t.Project)
-            .Where(t => t.ProjectId == model.Id).ToList();
+            .Where(t => t.ProjectId == id).ToList();
         
         if (tasks == null) throw new NullReferenceException("There are no tasks in this project");
         
@@ -63,6 +63,9 @@ public class TaskRepository : IAboutTaskRepository, IChangeTaskRepository
             Status = TasksStatus.ToDo
         };
 
+        Create(task);
+        SaveChanges();
+        
         return task;
     }
 
@@ -83,7 +86,7 @@ public class TaskRepository : IAboutTaskRepository, IChangeTaskRepository
         return task;
     }
 
-    public void DeleteTaskById(DeleteProjectRequestModel model)
+    public void DeleteTaskById(DeleteTaskRequestModel model)
     {
         var task = _db.Tasks
             .Include(t => t.Project)

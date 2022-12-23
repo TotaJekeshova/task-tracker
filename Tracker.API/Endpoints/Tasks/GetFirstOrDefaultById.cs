@@ -22,7 +22,7 @@ public class GetFirstOrDefaultById : EndpointBaseAsync
     }
 
     [HttpGet("/Task/getById")]
-    public override async Task<ActionResult<TaskDbModel>> HandleAsync(FindTaskByIdRequestModel request, 
+    public override async Task<ActionResult<TaskDbModel>> HandleAsync([FromQuery] FindTaskByIdRequestModel request, 
         CancellationToken cancellationToken = new CancellationToken())
     {
         var result = await _mediator.Send(request, cancellationToken);

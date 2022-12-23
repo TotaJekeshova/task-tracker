@@ -21,7 +21,7 @@ public class GetFirstOrDefaultById : EndpointBaseAsync
     }
 
     [HttpGet("/Project/getById")]
-    public override async Task<ActionResult<ProjectDbModel>> HandleAsync(FindProjectByIdRequestModel request, 
+    public override async Task<ActionResult<ProjectDbModel>> HandleAsync( [FromQuery] FindProjectByIdRequestModel request, 
         CancellationToken cancellationToken = new CancellationToken())
     {
         var result = await _mediator.Send(request, cancellationToken);

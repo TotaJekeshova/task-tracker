@@ -6,7 +6,7 @@ using Tracker.Domain.Entities.RequestModels.Projects;
 
 namespace Tracker.Application.Features.Projects.Queries;
 
-public class GetFilteredByEndDateCommandHandler : IRequestHandler<FilteredByDateRequestModel, 
+public class GetFilteredByEndDateCommandHandler : IRequestHandler<FilteredByEndDateRequestModel, 
     Result<List<ProjectDbModel>>>
 {
     private readonly IAboutProjectRepository _aboutProjectRepository;
@@ -16,10 +16,10 @@ public class GetFilteredByEndDateCommandHandler : IRequestHandler<FilteredByDate
         _aboutProjectRepository = aboutProjectRepository;
     }
 
-    public async Task<Result<List<ProjectDbModel>>> Handle(FilteredByDateRequestModel request, 
+    public async Task<Result<List<ProjectDbModel>>> Handle(FilteredByEndDateRequestModel request, 
         CancellationToken cancellationToken)
     {
-        var result = _aboutProjectRepository.GetFilteredByEndDate(request);
+        var result = _aboutProjectRepository.GetFilteredByEndDate(request.EndDate);
         return Result.Success(result);
     }
 }

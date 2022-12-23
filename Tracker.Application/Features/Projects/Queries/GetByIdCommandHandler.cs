@@ -18,7 +18,7 @@ public class GetByIdCommandHandler : IRequestHandler<FindProjectByIdRequestModel
 
     public async Task<Result<ProjectDbModel>> Handle(FindProjectByIdRequestModel request, CancellationToken cancellationToken)
     {
-        var result = _aboutProjectRepository.GetFirstOrDefaultById(request);
+        var result = _aboutProjectRepository.GetFirstOrDefaultById(request.Id);
         return Result.Success(result);
     }
 }

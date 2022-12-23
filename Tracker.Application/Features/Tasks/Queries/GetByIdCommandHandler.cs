@@ -9,10 +9,15 @@ namespace Tracker.Application.Features.Tasks.Queries;
 public class GetByIdCommandHandler  : IRequestHandler<FindTaskByIdRequestModel, Result<TaskDbModel>>
 {
     private readonly IAboutTaskRepository _aboutTaskRepository;
-    
+
+    public GetByIdCommandHandler(IAboutTaskRepository aboutTaskRepository)
+    {
+        _aboutTaskRepository = aboutTaskRepository;
+    }
+
     public async Task<Result<TaskDbModel>> Handle(FindTaskByIdRequestModel request, CancellationToken cancellationToken)
     {
-        var result = _aboutTaskRepository.GetFirstOrDefaultById(request);
+        var result = _aboutTaskRepository.GetFirstOrDefaultById(request.Id);
         return Result.Success(result);
     }
 }

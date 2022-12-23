@@ -21,7 +21,7 @@ public class GetAllByProjectId: EndpointBaseAsync
     }
 
     [HttpGet("/Task/getAllByProject")]
-    public override async Task<ActionResult<List<TaskDbModel>>> HandleAsync(FindAllByProjectIdRequestModel request, 
+    public override async Task<ActionResult<List<TaskDbModel>>> HandleAsync([FromQuery] FindAllByProjectIdRequestModel request, 
         CancellationToken cancellationToken = new CancellationToken())
     {
         var result = await _mediator.Send(request, cancellationToken);

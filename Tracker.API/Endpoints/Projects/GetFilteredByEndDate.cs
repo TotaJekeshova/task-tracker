@@ -8,7 +8,7 @@ using Tracker.Domain.Entities.RequestModels.Projects;
 namespace Tracker.API.Endpoints.Projects;
 
 public class GetFilteredByEndDate : EndpointBaseAsync
-    .WithRequest<FilteredByDateRequestModel>
+    .WithRequest<FilteredByEndDateRequestModel>
     .WithActionResult<List<ProjectDbModel>>
 {
     private readonly IMediator _mediator;
@@ -21,7 +21,7 @@ public class GetFilteredByEndDate : EndpointBaseAsync
     }
 
     [HttpGet("/Project/getByEndDate")]
-    public override async Task<ActionResult<List<ProjectDbModel>>> HandleAsync(FilteredByDateRequestModel request, 
+    public override async Task<ActionResult<List<ProjectDbModel>>> HandleAsync([FromQuery] FilteredByEndDateRequestModel request, 
         CancellationToken cancellationToken = new CancellationToken())
     {
         var result = await _mediator.Send(request, cancellationToken);
