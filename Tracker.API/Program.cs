@@ -1,3 +1,4 @@
+using Tracker.API;
 using Tracker.Application;
 using Tracker.Infrastructure;
 
@@ -11,6 +12,9 @@ services.AddEndpointsApiExplorer();
 // Add API services
 services.AddInfrastructureServices(builder.Configuration);
 services.AddApplicationServices();
+
+// Add Automapper maps
+services.SetAutomapperProfiles();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -1,8 +1,10 @@
+using Ardalis.Result;
+using MediatR;
 using Tracker.Domain.Enums;
 
 namespace Tracker.Domain.Entities.RequestModels.Projects;
 
-public class EditProjectRequestModel
+public class EditProjectRequestModel : IRequest<Result<ProjectDbModel>>
 {
     public int Id { get; set; }
     public string Name { get; set; }

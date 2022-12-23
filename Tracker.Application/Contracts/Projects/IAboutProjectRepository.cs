@@ -1,14 +1,13 @@
 using Tracker.Domain.Entities;
+using Tracker.Domain.Entities.RequestModels.Projects;
 
 namespace Tracker.Application.Contracts.Projects;
 
 public interface IAboutProjectRepository
 {
-    ProjectDbModel GetFirstOrDefaultById(int id);
-    List<ProjectDbModel> GetFirstOrDefaultByName(string name);
-    
-    List<ProjectDbModel> GetFilteredByStartDate (DateTime startDate);
-    List<ProjectDbModel> GetFilteredByEndDate(DateTime endDate);
-    List<ProjectDbModel> GetRangeByDates (DateTime startDate, DateTime endDate );
-    List<ProjectDbModel> OrderByStatus ();
+    ProjectDbModel GetFirstOrDefaultById(FindProjectByIdRequestModel model);
+
+    List<ProjectDbModel> GetFilteredByStartDate (FilteredByDateRequestModel model);
+    List<ProjectDbModel> GetFilteredByEndDate(FilteredByDateRequestModel model);
+    List<ProjectDbModel> GetRangeByDates (FilteredByDateRequestModel model);
 }

@@ -7,7 +7,7 @@ public interface IChangeProjectRepository : IBaseRepository<ProjectDbModel>
 {
     ProjectDbModel MapProjectToDefault (CreateProjectRequestModel model);
     ProjectDbModel EditProject (EditProjectRequestModel model);
-    void DeleteProjectById(int id);
+    void DeleteProjectById(DeleteProjectRequestModel model);
     ProjectDbModel AddTask(AddTaskRequestModel model);
     void RemoveTask(RemoveTaskRequestModel model);
 }

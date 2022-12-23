@@ -1,6 +1,9 @@
+using Ardalis.Result;
+using MediatR;
+
 namespace Tracker.Domain.Entities.RequestModels.Projects;
 
-public class AddTaskRequestModel
+public class AddTaskRequestModel : IRequest<Result<ProjectDbModel>>
 {
     public int ProjectId { get; set; }
     public string TaskName { get; set; }

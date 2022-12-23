@@ -1,6 +1,9 @@
+using Ardalis.Result;
+using MediatR;
+
 namespace Tracker.Domain.Entities.RequestModels.Projects;
 
-public class CreateProjectRequestModel
+public class CreateProjectRequestModel : IRequest<Result<ProjectDbModel>>
 {
     public string Name { get; set; }
     public DateTime StartDate { get; set; }
