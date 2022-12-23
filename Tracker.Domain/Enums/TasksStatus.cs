@@ -1,6 +1,6 @@
 namespace Tracker.Domain.Enums;
 
-public enum TaskStatus
+public enum TasksStatus
 {
     ToDo = 1,
     InProgress = 2,

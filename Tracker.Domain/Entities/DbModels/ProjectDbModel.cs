@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Tracker.Domain.Entities.DbModels;
 using Tracker.Domain.Enums;
 
 namespace Tracker.Domain.Entities;

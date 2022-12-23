@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Tracker.Domain.Entities;
+using Tracker.Domain.Entities.DbModels;
 
 namespace Tracker.Infrastructure.Persistance.DbMap;
 

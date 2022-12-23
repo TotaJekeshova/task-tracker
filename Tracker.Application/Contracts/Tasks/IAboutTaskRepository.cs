@@ -1,4 +1,5 @@
 using Tracker.Domain.Entities;
+using Tracker.Domain.Entities.DbModels;
 
 namespace Tracker.Application.Contracts.Tasks;
 
