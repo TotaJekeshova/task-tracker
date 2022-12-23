@@ -22,7 +22,7 @@ public class DeleteById : EndpointBaseAsync
     [HttpPost("/Project/Delete")]
     public override async Task<ActionResult<bool>> HandleAsync(DeleteProjectRequestModel request, CancellationToken cancellationToken = new CancellationToken())
     {
-        var result = await _mediator.Send(request, cancellationToken);
-        return Ok(result);
+        await _mediator.Send(request, cancellationToken);
+        return Ok("Project deleted");
     }
 }

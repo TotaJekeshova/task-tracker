@@ -23,7 +23,7 @@ public class RemoveTask : EndpointBaseAsync
     [HttpPost("/Project/RemoveTask")]
     public override async Task<ActionResult<bool>> HandleAsync(RemoveTaskRequestModel request, CancellationToken cancellationToken = new CancellationToken())
     {
-        var result = await _mediator.Send(request, cancellationToken);
-        return Ok(_mapper.Map<ProjectDbModel>(result));
+        await _mediator.Send(request, cancellationToken);
+        return Ok("Task removed from project");
     }
 }
